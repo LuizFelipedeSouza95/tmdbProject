@@ -1,0 +1,63 @@
+.button {
+    //margin-top: 1rem;
+    max-width: 600px;
+    background-color: var(--blue);
+    border: 0;
+    padding: 0.4rem;
+    color: var(--white);
+    border-radius: 0.5rem;
+    transition: filter 0.2s;
+
+    &[disabled] {
+        cursor: not-allowed;
+
+        svg {
+            animation: animate 2s infinite;
+        }
+    }
+
+    &:hover {
+        filter: brightness(1.08)
+    }
+}
+
+.buttonText::placeholder {
+    color: var(--white)
+}
+
+.buttonSearch {
+    flex-direction: row;
+    //width: 500px;
+    height: 50px;
+    border: 0 auto;
+    border-radius: 0.5rem;
+    background: transparent;
+    color: var(--white);
+    padding: 1rem;
+    border: 1px solid var(--gray-100);
+    border-color: var(--green-900);
+
+    transition: transform 0.8s;
+
+    &[disabled] {
+        cursor: not-allowed;
+
+        svg {
+            animation: animate 2s infinite;
+        }
+    }
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes animate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

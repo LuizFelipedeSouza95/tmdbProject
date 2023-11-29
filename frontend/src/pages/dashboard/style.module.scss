@@ -1,0 +1,218 @@
+.headerContainer {
+    //margin: 1rem;
+    height: 5rem;
+}
+
+.headerContent {
+    max-width: 100%;
+    height: 5rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+        color: white;
+    }
+}
+
+.inputSearch {
+    flex-direction: row;
+    max-width: 100%;
+    width: 70%;
+    height: 50px;
+    border: 0 auto;
+    border-radius: 0.5rem;
+    background-color: var(--dark-900);
+    color: var(--white);
+    padding: 1.5rem;
+    border: 1px solid var(--gray-100)
+}
+
+.buttonSearch {
+    flex-direction: row;
+    //width: 500px;
+    height: 50px;
+    border: 0 auto;
+    border-radius: 0.5rem;
+    background: transparent;
+    color: var(--white);
+    padding: 1rem;
+    border: 1px solid var(--gray-100);
+    border-color: var(--green-900);
+
+    transition: transform 0.8s;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+.sessionSearch {
+    width: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menuNav {
+    display: flex;
+    align-items: center;
+
+    a {
+        color: var(--white);
+        padding: 0 0.5rem;
+        display: inline-block;
+        position: relative;
+        transition: color 0.7s;
+
+        &+a {
+            margin-left: 2rem;
+        }
+
+        &:hover {
+            color: var(--green-900)
+        }
+    }
+
+    button {
+        margin-left: 2rem;
+        background: transparent;
+        border: 0;
+        transition: transform 0.8s;
+
+        &:hover {
+            transform: scale(1.2);
+        }
+
+    }
+}
+
+.containerMain {
+    max-width: 100%;
+    margin: 1rem auto;
+    padding: 0 2rem;
+    display: flex;
+    //flex-direction: row;
+}
+
+.sectionMain {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 2rem auto;
+}
+
+.post {
+    border-radius: 8px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.sectionPost {
+    //display: flex;
+    //flex-direction: row;
+    position: relative;
+    height: 0;
+    //margin-bottom: 1rem;
+    padding-bottom: 180%;
+    //overflow: hidden;
+
+    h6 {
+        color: var(--white);
+        font-size: 1.1rem;
+        font-weight: 600;
+        //margin-bottom: 1rem;
+    }
+}
+
+.sessionImg {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+//display: block;-webkit-user-select: none;margin: auto;background-color: hsl(0, 0%, 90%);transition: background-color 300ms;
+
+.imgNotFound{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    background-color: var(--white);
+
+    h1{
+        color: var(--dark-900)
+    }
+    //display: block;
+    //margin: auto;
+    //background-color: hsl(0, 0%, 90%);
+    //transition: background-color 300ms;
+}
+
+.sectionRodape {
+    display: flex;
+    flex-direction: column;
+    //align-items: center;
+    //justify-content: space-between;
+    //padding: 10px;
+    color: var(--white);
+
+    h3 {
+        width: 100%;
+    }
+
+    button {
+        position: relative;
+        width: 100%;
+        color: var(--white);
+        margin-top: 1rem;
+        background-color: var(--blue);
+        border: none;
+        //border-radius: 4px;
+        padding: 10px 20px;
+        cursor: pointer;
+        //transition: all 0.2s ease-in-out;
+        transition: transform 0.8s;
+
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+
+    .containerMain {
+        max-width: 100%;
+        margin: 1rem auto;
+        padding: 0 2rem;
+        display: flex;
+    }
+
+    .sectionMain {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin: 2rem auto;
+    }
+
+}
+
+@media only screen and (max-width: 600px) {
+
+    .containerMain {
+        max-width: 100%;
+        margin: 1rem auto;
+        padding: 0 2rem;
+        display: flex;
+    }
+
+    .sectionMain {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+        margin: 2rem auto;
+    }
+
+}

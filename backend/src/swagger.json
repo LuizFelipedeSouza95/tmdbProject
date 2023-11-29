@@ -1,0 +1,460 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de pesquisa de filmes",
+        "version": "1.0.0",
+        "description": "API para pesquisar filmes usando a API do The Movie Database",
+        "contact": {
+            "email": "luizfelipedesouza94@gmail.com"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000"
+        }
+    ],
+    "paths": {
+        "/searchMovies": {
+            "get": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "Pesquisa de filmes",
+                "description": "Retorna uma lista de filmes correspondentes à consulta de pesquisa fornecida",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "search",
+                        "required": true,
+                        "description": "A consulta de pesquisa para encontrar filmes",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "format": "int64",
+                                                "description": "O ID do filme"
+                                            },
+                                            "original_title": {
+                                                "type": "string",
+                                                "description": "O título original do filme"
+                                            },
+                                            "overview": {
+                                                "type": "string",
+                                                "description": "Uma breve descrição do filme"
+                                            },
+                                            "poster_path": {
+                                                "type": "string",
+                                                "description": "O caminho do pôster do filme na API"
+                                            },
+                                            "title": {
+                                                "type": "string",
+                                                "description": "O título do filme em português"
+                                            },
+                                            "vote_average": {
+                                                "type": "number",
+                                                "format": "float",
+                                                "description": "A classificação média do filme"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Sem conteúdo"
+                    },
+                    "404": {
+                        "description": "Não encontrado",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/searchMovieId": {
+            "get": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "Pesquisa de filmes por ID",
+                "description": "Retorna informações de um filme com base em seu ID na API do The Movie Database",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "id",
+                        "required": true,
+                        "description": "O ID do filme a ser pesquisado",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "description": "O ID do filme"
+                                        },
+                                        "original_title": {
+                                            "type": "string",
+                                            "description": "O título original do filme"
+                                        },
+                                        "overview": {
+                                            "type": "string",
+                                            "description": "Uma breve descrição do filme"
+                                        },
+                                        "poster_path": {
+                                            "type": "string",
+                                            "description": "O caminho do pôster do filme na API"
+                                        },
+                                        "vote_average": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "description": "A classificação média do filme"
+                                        },
+                                        "original_language": {
+                                            "type": "string",
+                                            "description": "A língua original do filme"
+                                        },
+                                        "release_date": {
+                                            "type": "string",
+                                            "format": "date",
+                                            "description": "A data de lançamento do filme"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Sem conteúdo"
+                    },
+                    "404": {
+                        "description": "Não encontrado",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "504": {
+                        "description": "Gateway Timeout",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/searchAllComments": {
+            "get": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Busca todos os comentários",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Comment"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Nenhum comentário encontrado"
+                    }
+                }
+            }
+        },
+        "/searchCommentsId": {
+            "get": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Busca comentários de um filme pelo ID",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "idMovie",
+                        "required": true,
+                        "description": "ID do filme para buscar os comentários",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CommentIdMovie"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Comentário não encontrado",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/destroyComment/{idComment}": {
+            "delete": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Excluir um comentário",
+                "description": "Exclui um comentário específico com base no ID fornecido",
+                "parameters": [
+                    {
+                        "name": "idComment",
+                        "in": "path",
+                        "description": "ID do comentário a ser excluído",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Comentário excluído com sucesso"
+                    },
+                    "404": {
+                        "description": "O ID do comentário não foi fornecido ou o comentário não foi encontrado"
+                    },
+                    "500": {
+                        "description": "Ocorreu um erro ao excluir o comentário"
+                    }
+                }
+            }
+        },
+        "/createComents": {
+            "post": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Create Coment",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "idMovie": {
+                                        "type": "number"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "coment": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "idMovie",
+                                    "name",
+                                    "coment"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "idMovie": {
+                                            "type": "number"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "coment": {
+                                            "type": "string"
+                                        },
+                                        "createdAt": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "idMovie",
+                                        "name",
+                                        "coment",
+                                        "createdAt"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Comment": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    }
+                }
+            },
+            "CommentIdMovie": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "ID do comentário"
+                    },
+                    "idMovie": {
+                        "type": "string",
+                        "description": "ID do filme relacionado ao comentário"
+                    },
+                    "username": {
+                        "type": "string",
+                        "description": "Nome do usuário que fez o comentário"
+                    },
+                    "text": {
+                        "type": "string",
+                        "description": "Texto do comentário"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Data de criação do comentário"
+                    }
+                },
+                "required": [
+                    "id",
+                    "idMovie",
+                    "username",
+                    "text",
+                    "createdAt"
+                ]
+            },
+            "CommentAll": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "ID do comentário"
+                    },
+                    "idMovie": {
+                        "type": "string",
+                        "description": "ID do filme relacionado ao comentário"
+                    },
+                    "username": {
+                        "type": "string",
+                        "description": "Nome do usuário que fez o comentário"
+                    },
+                    "text": {
+                        "type": "string",
+                        "description": "Texto do comentário"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Data de criação do comentário"
+                    }
+                },
+                "required": [
+                    "id",
+                    "idMovie",
+                    "username",
+                    "text",
+                    "createdAt"
+                ]
+            },
+            "destroyComment": {
+                "type": "object",
+                "properties": {
+                    "idComment": {
+                        "type": "number"
+                    }
+                }
+            }
+        }
+    }
+}
